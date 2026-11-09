@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Envío</title>
+  <!-- Importación de la fuente Poppins desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    /* Evitamos barras de desplazamiento generales en el iframe */
+    body {
+      margin: 0;
+      padding: 10px;
+      background-color: transparent;
+      overflow: hidden; 
+    }
+
+    .calc-container {
+      max-width: 550px;
+      margin: 10px auto;
+      padding: 25px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      background-color: #ffffff;
+      position: relative;
+    }
+    
+    .calc-title {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #007F71;
+      font-weight: 700;
+    }
+
+    /* Banner Tasa BCV con Botón de Modificar */
+    .bcv-tasa-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 25px;
+      background-color: #f1f5f9;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+
+    .bcv-tasa-banner span {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .btn-modificar-tasa {
+      padding: 4px 12px;
+      background-color: #007F71;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-modificar-tasa:hover {
+      background-color: #006358;
+    }
+
+    .calc-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .calc-field label {
+      width: 40%;
+      text-align: right;
+      padding-right: 15px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    .calc-field input, 
+    .calc-field select {
+      width: 58%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      background-color: #fff;
+    }
+
+    .calc-field input:focus, 
+    .calc-field select:focus {
+      border-color: #007F71;
+    }
+
+    option:disabled {
+      color: #a0a0a0;
+      background-color: #f5f5f5;
+    }
+
+    /* Botón Consultar */
+    .calc-btn-container {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .btn-consultar {
+      width: 58%;
+      margin-left: auto;
+      display: block;
+      padding: 12px;
+      background-color: #007F71;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-consultar:hover {
+      background-color: #006358;
+    }
+
+    /* Resultados */
+    .calc-result {
+      display: none;
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      border: 1px solid #e9ecef;
+    }
+
+    .calc-result p {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .calc-total {
+      font-size: 16px;
+      font-weight: 700;
+      color: #007F71;
+      border-top: 1px solid #dee2e6;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .monto-principal {
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .monto-secundario {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: normal;
+      display: block;
+      text-align: right;
+    }
+
+    /* Nota al pie de los resultados */
+    .calc-footer-note {
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.4;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 8px;
+    }
+
+    /* Ventanas Modales */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #007F71;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .modal-input-tasa {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-modal-cancelar {
+      padding: 10px 20px;
+      background-color: #ffffff;
+      color: #20328E;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-modal-cancelar:hover {
+      background-color: #f1f5f9;
+    }
+
+    .btn-modal-cotizar, .btn-modal-volver, .btn-modal-guardar {
+      padding: 10px 20px;
+      background-color: #20328E;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-modal-cotizar:hover, .btn-modal-volver:hover, .btn-modal-guardar:hover {
+      background-color: #15215d;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calc-container" id="calcContainer">
+  <h2 class="calc-title">Calculadora de envíos</h2>
+  
+  <div class="bcv-tasa-banner">
+    Tasa oficial BCV: <span id="tasa-bcv-txt">Cargando...</span>
+    <button class="btn-modificar-tasa" onclick="abrirModalTasa()">Modificar</button>
+  </div>
+  
+  <!-- Seleccione servicio -->
+  <div class="calc-field">
+    <label for="servicio">Seleccione servicio:</label>
+    <select id="servicio" onchange="ocultarResultados()">
+      <option value="" disabled selected>SELECCIONAR SERVICIO</option>
+      <option value="encomienda">Encomienda</option>
+      <option value="mudanza" disabled>Mudanza (No disponible)</option>
+      <option value="flete" disabled>Flete (No disponible)</option>
+    </select>
+  </div>
+
+  <!-- Modalidad -->
+  <div class="calc-field">
+    <label for="modalidad">Modalidad:</label>
+    <select id="modalidad" onchange="ocultarResultados()">
+      <option value="" disabled selected>SELECCIONAR MODALIDAD</option>
+      <option value="puerta_puerta">Puerta a puerta</option>
+      <option value="retiro_oficina">Retiro en oficina</option>
+    </select>
+  </div>
+
+  <!-- Ciudad origen -->
+  <div class="calc-field">
+    <label for="ciudad_origen">Ciudad origen:</label>
+    <input type="text" id="ciudad_origen" placeholder="INGRESE CIUDAD ORIGEN" oninput="ocultarResultados()">
+  </div>
+
+  <!-- Ciudad destino -->
+  <div class="calc-field">
+    <label for="ciudad_destino">Ciudad destino:</label>
+    <input type="text" id="ciudad_destino" placeholder="INGRESE CIUDAD DESTINO" oninput="ocultarResultados()">
+  </div>
+
+  <!-- Peso -->
+  <div class="calc-field">
+    <label for="peso">Peso (kg):</label>
+    <input type="number" id="peso" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
+  </div>
+
+  <!-- Tipo de envío -->
+  <div class="calc-field">
+    <label for="tipo_envio">Tipo de envío:</label>
+    <select id="tipo_envio" onchange="ocultarResultados()">
+      <option value="" disabled selected>SELECCIONAR TIPO ENVÍO</option>
+      <option value="documento">Documento</option>
+      <option value="mercancia">Mercancía</option>
+    </select>
+  </div>
+
+  <!-- Valor declarado -->
+  <div class="calc-field">
+    <label for="valor_declarado">Valor declarado (Bs):</label>
+    <input type="number" id="valor_declarado" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
+  </div>
+
+  <!-- Botón Consultar -->
+  <div class="calc-btn-container">
+    <button class="btn-consultar" onclick="mostrarResultados()">Consultar</button>
+  </div>
+
+  <!-- Resultados -->
+  <div class="calc-result" id="box-resultados">
+    <p><span>Flete</span> <span class="monto-principal" id="res_flete">Bs 0,00</span></p>
+    <p><span>Servicio de protección de encomienda</span> <span class="monto-principal" id="res_seguro">Bs 0,00</span></p>
+    <p><span>Subtotal</span> <span class="monto-principal" id="res_subtotal">Bs 0,00</span></p>
+    <p><span>IVA</span> <span class="monto-principal" id="res_iva">Bs 0,00</span></p>
+    <p><span>Franqueo postal</span> <span class="monto-principal" id="res_franqueo">Bs 0,00</span></p>
+    <p class="calc-total">
+      <span>Total a pagar</span>
+      <span>
+        <span class="monto-principal" id="res_total_bs">Bs 0,00</span>
+        <span class="monto-secundario" id="res_total_usd">$0.00 USD</span>
+      </span>
+    </p>
+    <div class="calc-footer-note">
+      Costo de envío referenciales. Debe confirmar los montos aquí reflejados con la empresa Transporte y encomiendas Humboldt, C.A.
+    </div>
+  </div>
+</div>
+
+<!-- Modal Modificar Tasa BCV -->
+<div class="modal-overlay" id="modalModificarTasa">
+  <div class="modal-content">
+    <h3>Modificar Tasa BCV</h3>
+    <p style="text-align: center; margin-bottom: 10px;">Ingrese el valor actualizado de la tasa oficial en Bolívares (Bs):</p>
+    <input type="number" id="inputManualTasa" class="modal-input-tasa" placeholder="Ej. 36.50" step="0.01" min="0">
+    <div class="modal-buttons">
+      <button class="btn-modal-cancelar" onclick="cerrarModalTasa()">Cancelar</button>
+      <button class="btn-modal-guardar" onclick="guardarTasaManual()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Campos Incompletos -->
+<div class="modal-overlay" id="modalCamposVacios">
+  <div class="modal-content">
+    <h3>Campos incompletos</h3>
+    <p>Por favor, complete todos los campos requeridos y seleccione las opciones correspondientes en la calculadora antes de realizar su consulta.</p>
+    <div class="modal-buttons" style="justify-content: flex-end;">
+      <button class="btn-modal-volver" onclick="cerrarModalCampos()">Volver</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Tasa BCV Faltante -->
+<div class="modal-overlay" id="modalTasaFaltante">
+  <div class="modal-content">
+    <h3>Tasa BCV no disponible</h3>
+    <p>No se ha podido cargar o definir la tasa oficial del BCV. Por favor, haga clic en el botón <b>"Modificar"</b> de la parte superior para ingresarla manualmente antes de realizar su consulta.</p>
+    <div class="modal-buttons" style="justify-content: flex-end;">
+      <button class="btn-modal-volver" onclick="cerrarModalTasaFaltante()">Entendido</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Peso > 30kg -->
+<div class="modal-overlay" id="modalExcesoPeso">
+  <div class="modal-content">
+    <h3>Aviso importante sobre su envío</h3>
+    <p>Hemos detectado que el peso de su paquete excede los <b>30kg</b>, por lo que clasifica como <b>carga pesada</b> y no como encomienda regular.<br><br>
+    Para brindarle una tarifa y un servicio adecuado, por favor comuníquese directamente con nuestro equipo para solicitar su cotización personalizada.</p>
+    <div class="modal-buttons">
+      <button class="btn-modal-cancelar" onclick="cerrarModalPeso()">Cancelar</button>
+      <button class="btn-modal-cotizar" onclick="enviarWhatsApp()">Cotizar envío</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let tasaBcvGlobal = 0;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch('https://ve.dolarapi.com/v1/dolares/official')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.promedio) {
+          tasaBcvGlobal = data.promedio;
+          document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
+        } else {
+          document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener la tasa BCV:', error);
+        document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
+      });
+
+    // Auto-redimensionamiento dinámico para Google Sites
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const height = entry.target.scrollHeight;
+        window.parent.postMessage({ sentHeight: height }, '*');
+      }
+    });
+    observer.observe(document.body);
+  });
+
+  function abrirModalTasa() {
+    document.getElementById('inputManualTasa').value = tasaBcvGlobal > 0 ? tasaBcvGlobal.toFixed(2) : '';
+    document.getElementById('modalModificarTasa').style.display = 'flex';
+  }
+
+  function cerrarModalTasa() {
+    document.getElementById('modalModificarTasa').style.display = 'none';
+  }
+
+  function cerrarModalTasaFaltante() {
+    document.getElementById('modalTasaFaltante').style.display = 'none';
+  }
+
+  function guardarTasaManual() {
+    const valInput = parseFloat(document.getElementById('inputManualTasa').value);
+    if (!isNaN(valInput) && valInput > 0) {
+      tasaBcvGlobal = valInput;
+      document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
+      cerrarModalTasa();
+      ocultarResultados();
+    } else {
+      alert("Por favor ingrese una tasa válida.");
+    }
+  }
+
+  function ocultarResultados() {
+    document.getElementById('box-resultados').style.display = 'none';
+  }
+
+  function mostrarResultados() {
+    const servicio = document.getElementById('servicio').value;
+    const modalidad = document.getElementById('modalidad').value;
+    const ciudadOrigen = document.getElementById('ciudad_origen').value.trim();
+    const ciudadDestino = document.getElementById('ciudad_destino').value.trim();
+    const pesoInput = document.getElementById('peso').value;
+    const tipoEnvio = document.getElementById('tipo_envio').value;
+    const valorDeclaradoInput = document.getElementById('valor_declarado').value;
+
+    if (!servicio || !modalidad || ciudadOrigen === "" || ciudadDestino === "" || pesoInput === "" || !tipoEnvio || valorDeclaradoInput === "") {
+      ocultarResultados();
+      document.getElementById('modalCamposVacios').style.display = 'flex';
+      return;
+    }
+
+    const peso = parseFloat(pesoInput);
+
+    if (peso > 30) {
+      ocultarResultados();
+      document.getElementById('modalExcesoPeso').style.display = 'flex';
+      return;
+    }
+
+    if (tasaBcvGlobal <= 0) {
+      ocultarResultados();
+      document.getElementById('modalTasaFaltante').style.display = 'flex';
+      return;
+    }
+
+    const valorDeclaradoBs = parseFloat(valorDeclaradoInput);
+
+    const fleteUsd = peso * 3.95;
+    const fleteBs = fleteUsd * tasaBcvGlobal;
+    const seguroBs = valorDeclaradoBs * 0.035;
+    const subtotalBs = fleteBs + seguroBs;
+    const ivaBs = subtotalBs * 0.16;
+    const franqueoBs = fleteBs * 0.08;
+
+    const totalBs = subtotalBs + ivaBs + franqueoBs;
+    const totalUsd = totalBs / tasaBcvGlobal;
+
+    const formatoBs = (monto) => `Bs ${monto.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+    document.getElementById('res_flete').innerText = formatoBs(fleteBs);
+    document.getElementById('res_seguro').innerText = formatoBs(seguroBs);
+    document.getElementById('res_subtotal').innerText = formatoBs(subtotalBs);
+    document.getElementById('res_iva').innerText = formatoBs(ivaBs);
+    document.getElementById('res_franqueo').innerText = formatoBs(franqueoBs);
+    
+    document.getElementById('res_total_bs').innerText = formatoBs(totalBs);
+    document.getElementById('res_total_usd').innerText = `$${totalUsd.toFixed(2)} USD`;
+
+    document.getElementById('box-resultados').style.display = 'block';
+  }
+
+  function cerrarModalCampos() {
+    document.getElementById('modalCamposVacios').style.display = 'none';
+  }
+
+  function cerrarModalPeso() {
+    document.getElementById('modalExcesoPeso').style.display = 'none';
+  }
+
+  function enviarWhatsApp() {
+    const origen = document.getElementById('ciudad_origen').value.trim();
+    const destino = document.getElementById('ciudad_destino').value.trim();
+    const tipoEnvioTexto = document.getElementById('tipo_envio').options[document.getElementById('tipo_envio').selectedIndex].text;
+    const peso = document.getElementById('peso').value;
+
+    const mensaje = `Hola, necesito cotizar un envío de más de 30kg, aquí les comparto los datos de mi envío:\n\n- Origen: ${origen}\n- Destino: ${destino}\n- Tipo de mercancía / producto: ${tipoEnvioTexto}\n- Peso: ${peso}kg\n\nQuedo atento a su respuesta para coordinar la logística.`;
+
+    const numeroWhatsApp = "584124259774";
+    const urlWp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
+    
+    window.open(urlWp, '_blank');
+    cerrarModalPeso();
+  }
+</script>
+
+</body>
+</html>
