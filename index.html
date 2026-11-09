@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Envío</title>
+  <title>Calculadora de Envíos - Transporte y Encomiendas Humboldt, C.A.</title>
   <!-- Importación de la fuente Poppins desde Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,17 +15,16 @@
       box-sizing: border-box;
     }
 
-    /* Evitamos barras de desplazamiento generales en el iframe */
+    /* Permitimos scroll natural en la página web completa */
     body {
       margin: 0;
-      padding: 10px;
-      background-color: transparent;
-      overflow: hidden; 
+      padding: 20px 10px;
+      background-color: #f8fafc;
     }
 
     .calc-container {
       max-width: 550px;
-      margin: 10px auto;
+      margin: 20px auto;
       padding: 25px;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
@@ -435,15 +434,6 @@
         console.error('Error al obtener la tasa BCV:', error);
         document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
       });
-
-    // Auto-redimensionamiento dinámico para Google Sites
-    const observer = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        const height = entry.target.scrollHeight;
-        window.parent.postMessage({ sentHeight: height }, '*');
-      }
-    });
-    observer.observe(document.body);
   });
 
   function abrirModalTasa() {
