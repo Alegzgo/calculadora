@@ -3,44 +3,186 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Envíos - Transporte y Encomiendas Humboldt, C.A.</title>
-  <!-- Importación de la fuente Poppins desde Google Fonts -->
+  <title>Transporte y Encomiendas Humboldt, C.A. | Logística y Envíos Nacionales</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
+    :root {
+      --primary-teal: #007F71;
+      --primary-teal-dark: #006358;
+      --accent-blue: #20328E;
+      --accent-blue-dark: #15215d;
+      --support-mint: #8FC9BC;
+      --support-mint-light: #e6f4f1;
+      --bg-gray: #F6F6F6;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+    }
+
     * {
       font-family: 'Poppins', sans-serif;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
-    /* Permitimos scroll natural en la página web completa */
     body {
       margin: 0;
-      padding: 20px 10px;
-      background-color: #f8fafc;
+      padding: 0;
+      background-color: #ffffff;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ================= NAVBAR LIMPIA ================= */
+    .navbar {
+      position: relative;
+      z-index: 20;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 70px;
+    }
+
+    /* ================= HERO SECTION ================= */
+    .hero-wrapper {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 60px;
+    }
+
+    .hero-blob-bg {
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 650px;
+      height: 650px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-section {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 540px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background-color: var(--support-mint-light);
+      color: var(--primary-teal);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .hero-title {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin: 0 0 18px 0;
+    }
+
+    .hero-title span {
+      color: var(--primary-teal);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 30px 0;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      padding: 13px 28px;
+      background-color: var(--primary-teal);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(0, 127, 113, 0.28);
+      transition: all 0.2s;
+    }
+
+    .btn-hero-primary:hover {
+      background-color: var(--primary-teal-dark);
+      transform: translateY(-2px);
+    }
+
+    .hero-illustration {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ================= SECCIÓN 2: CALCULADORA CENTRADA ================= */
+    .calc-section {
+      background-color: var(--bg-gray);
+      padding: 80px 24px;
+      position: relative;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .calc-column {
+      width: 100%;
+      max-width: 560px;
     }
 
     .calc-container {
-      max-width: 550px;
-      margin: 20px auto;
-      padding: 25px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      width: 100%;
+      padding: 32px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
       background-color: #ffffff;
       position: relative;
     }
-    
+
     .calc-title {
       text-align: center;
-      margin-bottom: 15px;
-      color: #007F71;
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: var(--primary-teal);
       font-weight: 700;
+      font-size: 22px;
     }
 
-    /* Banner Tasa BCV con Botón de Modificar */
     .bcv-tasa-banner {
       display: flex;
       align-items: center;
@@ -48,10 +190,10 @@
       gap: 12px;
       font-size: 13px;
       color: #64748b;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
       background-color: #f1f5f9;
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 10px 14px;
+      border-radius: 8px;
     }
 
     .bcv-tasa-banner span {
@@ -61,7 +203,7 @@
 
     .btn-modificar-tasa {
       padding: 4px 12px;
-      background-color: #007F71;
+      background-color: var(--primary-teal);
       color: #ffffff;
       border: none;
       border-radius: 4px;
@@ -72,14 +214,14 @@
     }
 
     .btn-modificar-tasa:hover {
-      background-color: #006358;
+      background-color: var(--primary-teal-dark);
     }
 
     .calc-field {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
     .calc-field label {
@@ -87,25 +229,27 @@
       text-align: right;
       padding-right: 15px;
       font-weight: 600;
-      font-size: 13px;
-      color: #333;
+      font-size: 12.5px;
+      color: #334155;
       text-transform: uppercase;
     }
 
     .calc-field input, 
     .calc-field select {
       width: 58%;
-      padding: 10px;
+      padding: 10px 12px;
       font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
       outline: none;
       background-color: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .calc-field input:focus, 
     .calc-field select:focus {
-      border-color: #007F71;
+      border-color: var(--primary-teal);
+      box-shadow: 0 0 0 3px rgba(0, 127, 113, 0.12);
     }
 
     option:disabled {
@@ -113,10 +257,9 @@
       background-color: #f5f5f5;
     }
 
-    /* Botón Consultar */
     .calc-btn-container {
       text-align: right;
-      margin-top: 20px;
+      margin-top: 22px;
     }
 
     .btn-consultar {
@@ -124,28 +267,29 @@
       margin-left: auto;
       display: block;
       padding: 12px;
-      background-color: #007F71;
+      background-color: var(--accent-blue);
       color: #ffffff;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(32, 50, 142, 0.2);
       transition: background-color 0.2s ease;
     }
 
     .btn-consultar:hover {
-      background-color: #006358;
+      background-color: var(--accent-blue-dark);
     }
 
     /* Resultados */
     .calc-result {
       display: none;
-      margin-top: 25px;
-      padding: 15px;
-      background-color: #f8f9fa;
-      border-radius: 4px;
-      border: 1px solid #e9ecef;
+      margin-top: 22px;
+      padding: 18px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
     }
 
     .calc-result p {
@@ -160,8 +304,8 @@
     .calc-total {
       font-size: 16px;
       font-weight: 700;
-      color: #007F71;
-      border-top: 1px solid #dee2e6;
+      color: var(--primary-teal);
+      border-top: 1px solid #cbd5e1;
       padding-top: 10px;
       margin-top: 10px;
     }
@@ -179,18 +323,249 @@
       text-align: right;
     }
 
-    /* Nota al pie de los resultados */
     .calc-footer-note {
       font-size: 11px;
       color: #64748b;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 14px;
       line-height: 1.4;
-      border-top: 1px dashed #e2e8f0;
-      padding-top: 8px;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 10px;
     }
 
-    /* Ventanas Modales */
+    /* ================= SECCIÓN 3: CÓMO FUNCIONA ================= */
+    .how-section {
+      padding: 85px 24px;
+      background-color: #ffffff;
+      position: relative;
+    }
+
+    .how-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .how-content {
+      flex: 1;
+      max-width: 520px;
+    }
+
+    .section-icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--accent-blue);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 15px rgba(32, 50, 142, 0.25);
+    }
+
+    .section-heading {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 14px 0;
+    }
+
+    .section-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0 0 24px 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--support-mint-light);
+      color: var(--primary-teal);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-item h4 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .step-item p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .how-illustration {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ================= SECCIÓN 4: CARDS HORIZONTALES ================= */
+    .features-section {
+      padding: 85px 24px;
+      background-color: var(--bg-gray);
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cards-horizontal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 28px 22px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-card.teal {
+      background-color: var(--primary-teal);
+      color: #ffffff;
+    }
+
+    .feature-card.white {
+      background-color: #ffffff;
+      color: var(--text-dark);
+      border: 1px solid #e2e8f0;
+    }
+
+    .feature-card.blue {
+      background-color: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .feature-card.mint {
+      background-color: var(--support-mint);
+      color: #0f2926;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-card.white .card-icon {
+      background-color: var(--support-mint-light);
+      color: var(--primary-teal);
+    }
+
+    .feature-card.mint .card-icon {
+      background-color: rgba(0, 127, 113, 0.15);
+      color: var(--primary-teal-dark);
+    }
+
+    .feature-card h4 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.92;
+    }
+
+    /* ================= SECCIÓN 5: CTA FINAL ================= */
+    .cta-section {
+      padding: 80px 24px 60px;
+      background-color: #ffffff;
+      text-align: center;
+    }
+
+    .cta-box {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 0 0 12px 0;
+    }
+
+    .cta-title span {
+      color: var(--primary-teal);
+    }
+
+    .cta-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0 0 28px 0;
+    }
+
+    .cta-action-bar {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ================= FOOTER ================= */
+    .footer-wrapper {
+      position: relative;
+      background-color: #ffffff;
+      padding-top: 20px;
+    }
+
+    .footer-bottom-wave {
+      position: relative;
+      width: 100%;
+      line-height: 0;
+    }
+
+    .footer-copy {
+      background-color: var(--accent-blue);
+      color: #ffffff;
+      text-align: center;
+      padding: 16px 20px;
+      font-size: 12px;
+    }
+
+    /* ================= MODALES ================= */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -198,7 +573,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.55);
       z-index: 1000;
       justify-content: center;
       align-items: center;
@@ -210,14 +585,15 @@
       border-radius: 16px;
       max-width: 500px;
       width: 90%;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
 
     .modal-content h3 {
       font-size: 18px;
       font-weight: 700;
-      color: #007F71;
+      color: var(--primary-teal);
+      margin-top: 0;
       margin-bottom: 15px;
     }
 
@@ -248,301 +624,529 @@
     .btn-modal-cancelar {
       padding: 10px 20px;
       background-color: #ffffff;
-      color: #20328E;
+      color: var(--accent-blue);
       border: 1px solid #cbd5e1;
       border-radius: 8px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .btn-modal-cancelar:hover {
-      background-color: #f1f5f9;
     }
 
     .btn-modal-cotizar, .btn-modal-volver, .btn-modal-guardar {
       padding: 10px 20px;
-      background-color: #20328E;
+      background-color: var(--accent-blue);
       color: #ffffff;
       border: none;
       border-radius: 8px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s;
     }
 
-    .btn-modal-cotizar:hover, .btn-modal-volver:hover, .btn-modal-guardar:hover {
-      background-color: #15215d;
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 960px) {
+      .hero-section,
+      .how-grid {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-content, .how-content {
+        max-width: 100%;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .section-icon-badge {
+        margin: 0 auto 18px;
+      }
+
+      .step-item {
+        text-align: left;
+      }
+
+      .cards-horizontal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 30px;
+      }
+
+      .cards-horizontal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calc-field {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .calc-field label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 5px;
+      }
+
+      .calc-field input, 
+      .calc-field select, 
+      .btn-consultar {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="calc-container" id="calcContainer">
-  <h2 class="calc-title">Calculadora de envíos</h2>
-  
-  <div class="bcv-tasa-banner">
-    Tasa oficial BCV: <span id="tasa-bcv-txt">Cargando...</span>
-    <button class="btn-modificar-tasa" onclick="abrirModalTasa()">Modificar</button>
-  </div>
-  
-  <!-- Seleccione servicio -->
-  <div class="calc-field">
-    <label for="servicio">Seleccione servicio:</label>
-    <select id="servicio" onchange="ocultarResultados()">
-      <option value="" disabled selected>SELECCIONAR SERVICIO</option>
-      <option value="encomienda">Encomienda</option>
-      <option value="mudanza" disabled>Mudanza (No disponible)</option>
-      <option value="flete" disabled>Flete (No disponible)</option>
-    </select>
+  <!-- ================= NAVBAR ================= -->
+  <div class="hero-wrapper" id="inicio">
+    <svg class="hero-blob-bg" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#e6f4f1" d="M442.5,58.5C506.2,102.6,554.7,178.5,567.8,261.2C580.9,343.9,558.6,433.4,499.7,493.1C440.8,552.8,345.3,582.7,256.8,567.2C168.3,551.7,86.8,490.8,46.1,411.3C5.4,331.8,5.5,233.7,51.2,157.1C96.9,80.5,188.2,25.4,277.6,15.6C367,5.8,378.8,14.4,442.5,58.5Z"/>
+      <path fill="#20328E" opacity="0.92" d="M495,0 L600,0 L600,360 C530,330 490,260 510,190 C530,120 470,60 495,0 Z"/>
+    </svg>
+
+    <header class="navbar"></header>
+
+    <section class="hero-section">
+      <div class="hero-content">
+        <span class="hero-tag">LOGÍSTICA</span>
+        <h1 class="hero-title">Nos movemos <span style="color: var(--primary-teal);">juntos</span></h1>
+        <p class="hero-desc">
+          Calcula al instante el costo y envía con Transporte y encomiendas Humboldt, C.A.
+        </p>
+        <div class="hero-buttons">
+          <a href="#cotizador" class="btn-hero-primary">Calcular envío ahora</a>
+        </div>
+      </div>
+
+      <!-- Ilustración vectorial de camioneta panel -->
+      <div class="hero-illustration">
+        <svg width="440" height="340" viewBox="0 0 440 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="220" cy="305" rx="185" ry="18" fill="#e2e8f0"/>
+          <rect x="230" y="35" width="120" height="220" rx="18" fill="#20328E"/>
+          <rect x="238" y="47" width="104" height="196" rx="12" fill="#ffffff"/>
+          <circle cx="290" cy="115" r="26" fill="#e6f4f1"/>
+          <path d="M290 97C282.8 97 277 102.8 277 110C277 119.5 290 132 290 132C290 132 303 119.5 303 110C303 102.8 297.2 97 290 97ZM290 115C287.2 115 285 112.8 285 110C285 107.2 287.2 105 290 105C292.8 105 295 107.2 295 110C295 112.8 292.8 115 290 115Z" fill="#007F71"/>
+          <rect x="258" y="155" width="64" height="8" rx="4" fill="#cbd5e1"/>
+          <rect x="265" y="170" width="50" height="8" rx="4" fill="#8FC9BC"/>
+          <rect x="50" y="165" width="165" height="90" rx="18" fill="#007F71"/>
+          <path d="M175 165H205C213.8 165 221 172.2 221 181V255H175V165Z" fill="#20328E"/>
+          <path d="M65 195H115V255H65V195Z" fill="#007F71"/>
+          <path d="M125 195H165V255H125V195Z" fill="#007F71"/>
+          <path d="M178 175H202C205.3 175 208 177.7 208 181V202H178V175Z" fill="#ffffff" opacity="0.9"/>
+          <circle cx="85" cy="255" r="20" fill="#1e293b"/>
+          <circle cx="85" cy="255" r="8" fill="#cbd5e1"/>
+          <circle cx="185" cy="255" r="20" fill="#1e293b"/>
+          <circle cx="185" cy="255" r="8" fill="#cbd5e1"/>
+          <rect x="25" y="210" width="32" height="45" rx="6" fill="#8FC9BC"/>
+        </svg>
+      </div>
+    </section>
   </div>
 
-  <!-- Modalidad -->
-  <div class="calc-field">
-    <label for="modalidad">Modalidad:</label>
-    <select id="modalidad" onchange="ocultarResultados()">
-      <option value="" disabled selected>SELECCIONAR MODALIDAD</option>
-      <option value="puerta_puerta">Puerta a puerta</option>
-      <option value="retiro_oficina">Retiro en oficina</option>
-    </select>
-  </div>
+  <!-- ================= SECCIÓN 2: CALCULADORA CENTRADA ================= -->
+  <section class="calc-section" id="cotizador">
+    <div class="section-container">
+      <div class="calc-column">
+        <div class="calc-container" id="calcContainer">
+          <h2 class="calc-title">Calculadora de envíos</h2>
+          
+          <div class="bcv-tasa-banner">
+            Tasa oficial BCV: <span id="tasa-bcv-txt">Cargando...</span>
+            <button class="btn-modificar-tasa" onclick="abrirModalTasa()">Modificar</button>
+          </div>
+          
+          <div class="calc-field">
+            <label for="servicio">Seleccione servicio:</label>
+            <select id="servicio" onchange="ocultarResultados()">
+              <option value="" disabled selected>SELECCIONAR SERVICIO</option>
+              <option value="encomienda">Encomienda</option>
+              <option value="mudanza" disabled>Mudanza (No disponible)</option>
+              <option value="flete" disabled>Flete (No disponible)</option>
+            </select>
+          </div>
 
-  <!-- Ciudad origen -->
-  <div class="calc-field">
-    <label for="ciudad_origen">Ciudad origen:</label>
-    <input type="text" id="ciudad_origen" placeholder="INGRESE CIUDAD ORIGEN" oninput="ocultarResultados()">
-  </div>
+          <div class="calc-field">
+            <label for="modalidad">Modalidad:</label>
+            <select id="modalidad" onchange="ocultarResultados()">
+              <option value="" disabled selected>SELECCIONAR MODALIDAD</option>
+              <option value="puerta_puerta">Puerta a puerta</option>
+              <option value="retiro_oficina">Retiro en oficina</option>
+            </select>
+          </div>
 
-  <!-- Ciudad destino -->
-  <div class="calc-field">
-    <label for="ciudad_destino">Ciudad destino:</label>
-    <input type="text" id="ciudad_destino" placeholder="INGRESE CIUDAD DESTINO" oninput="ocultarResultados()">
-  </div>
+          <div class="calc-field">
+            <label for="ciudad_origen">Ciudad origen:</label>
+            <input type="text" id="ciudad_origen" placeholder="INGRESE CIUDAD ORIGEN" oninput="ocultarResultados()">
+          </div>
 
-  <!-- Peso -->
-  <div class="calc-field">
-    <label for="peso">Peso (kg):</label>
-    <input type="number" id="peso" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
-  </div>
+          <div class="calc-field">
+            <label for="ciudad_destino">Ciudad destino:</label>
+            <input type="text" id="ciudad_destino" placeholder="INGRESE CIUDAD DESTINO" oninput="ocultarResultados()">
+          </div>
 
-  <!-- Tipo de envío -->
-  <div class="calc-field">
-    <label for="tipo_envio">Tipo de envío:</label>
-    <select id="tipo_envio" onchange="ocultarResultados()">
-      <option value="" disabled selected>SELECCIONAR TIPO ENVÍO</option>
-      <option value="documento">Documento</option>
-      <option value="mercancia">Mercancía</option>
-    </select>
-  </div>
+          <div class="calc-field">
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
+          </div>
 
-  <!-- Valor declarado -->
-  <div class="calc-field">
-    <label for="valor_declarado">Valor declarado (Bs):</label>
-    <input type="number" id="valor_declarado" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
-  </div>
+          <div class="calc-field">
+            <label for="tipo_envio">Tipo de envío:</label>
+            <select id="tipo_envio" onchange="ocultarResultados()">
+              <option value="" disabled selected>SELECCIONAR TIPO ENVÍO</option>
+              <option value="documento">Documento</option>
+              <option value="mercancia">Mercancía</option>
+            </select>
+          </div>
 
-  <!-- Botón Consultar -->
-  <div class="calc-btn-container">
-    <button class="btn-consultar" onclick="mostrarResultados()">Consultar</button>
-  </div>
+          <div class="calc-field">
+            <label for="valor_declarado">Valor declarado (Bs):</label>
+            <input type="number" id="valor_declarado" placeholder="0.00" step="0.01" min="0" oninput="ocultarResultados()">
+          </div>
 
-  <!-- Resultados -->
-  <div class="calc-result" id="box-resultados">
-    <p><span>Flete</span> <span class="monto-principal" id="res_flete">Bs 0,00</span></p>
-    <p><span>Servicio de protección de encomienda</span> <span class="monto-principal" id="res_seguro">Bs 0,00</span></p>
-    <p><span>Subtotal</span> <span class="monto-principal" id="res_subtotal">Bs 0,00</span></p>
-    <p><span>IVA</span> <span class="monto-principal" id="res_iva">Bs 0,00</span></p>
-    <p><span>Franqueo postal</span> <span class="monto-principal" id="res_franqueo">Bs 0,00</span></p>
-    <p class="calc-total">
-      <span>Total a pagar</span>
-      <span>
-        <span class="monto-principal" id="res_total_bs">Bs 0,00</span>
-        <span class="monto-secundario" id="res_total_usd">$0.00 USD</span>
-      </span>
-    </p>
-    <div class="calc-footer-note">
-      Costo de envío referenciales. Debe confirmar los montos aquí reflejados con la empresa Transporte y encomiendas Humboldt, C.A.
+          <div class="calc-btn-container">
+            <button class="btn-consultar" onclick="mostrarResultados()">Consultar</button>
+          </div>
+
+          <div class="calc-result" id="box-resultados">
+            <p><span>Flete</span> <span class="monto-principal" id="res_flete">Bs 0,00</span></p>
+            <p><span>Servicio de protección de encomienda</span> <span class="monto-principal" id="res_seguro">Bs 0,00</span></p>
+            <p><span>Subtotal</span> <span class="monto-principal" id="res_subtotal">Bs 0,00</span></p>
+            <p><span>Impuestos</span> <span class="monto-principal" id="res_impuestos">Bs 0,00</span></p>
+            <p class="calc-total">
+              <span>Total a pagar</span>
+              <span>
+                <span class="monto-principal" id="res_total_bs">Bs 0,00</span>
+                <span class="monto-secundario" id="res_total_usd">$0.00 USD</span>
+              </span>
+            </p>
+            <div class="calc-footer-note">
+              Costo de envío referenciales. Debe confirmar los montos aquí reflejados con la empresa Transporte y encomiendas Humboldt, C.A.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN 3: CÓMO FUNCIONA ================= -->
+  <section class="how-section" id="como-funciona">
+    <div class="how-grid">
+      <div class="how-content">
+        <div class="section-icon-badge">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h2 class="section-heading">¿Cómo funciona nuestro servicio?</h2>
+        <p class="section-text">
+          Gestionar tu envío con nosotros es un proceso rápido y adaptado a tus necesidades comerciales o personales.
+        </p>
+
+        <div class="step-item">
+          <div class="step-dot">1</div>
+          <div>
+            <h4>Calcula el costo en linea</h4>
+            <p>Ingresa origen, destino, peso y valor declarado para obtener el costo de envío estimado al instante.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-dot">2</div>
+          <div>
+            <h4>Coordina tu envío</h4>
+            <p>Contáctanos y haz la solicitud a nuestro equipo.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-dot">3</div>
+          <div>
+            <h4>Traslados seguros hasta su destino</h4>
+            <p>Tus paquetes viajan protegidos bajo nuestros estándares de logística hasta llegar a su destino.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ilustración vectorial de camión pesado -->
+      <div class="how-illustration">
+        <svg width="430" height="320" viewBox="0 0 430 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 180C30 110 100 35 195 30C290 25 385 85 395 170C405 255 315 295 215 290C115 285 80 250 55 180Z" fill="#F6F6F6"/>
+          <circle cx="85" cy="115" r="24" fill="#e6f4f1"/>
+          <path d="M85 100C77.8 100 72 105.8 72 113C72 122.7 85 136 85 136C85 136 98 122.7 98 113C98 105.8 92.2 100 85 100ZM85 117.5C82.5 117.5 80.5 115.5 80.5 113C80.5 110.5 82.5 108.5 85 108.5C87.5 108.5 89.5 110.5 89.5 113C89.5 115.5 87.5 117.5 85 117.5Z" fill="#007F71"/>
+          <rect x="190" y="75" width="195" height="145" rx="8" fill="#20328E"/>
+          <line x1="225" y1="90" x2="225" y2="205" stroke="#8FC9BC" stroke-width="3" opacity="0.4"/>
+          <line x1="265" y1="90" x2="265" y2="205" stroke="#8FC9BC" stroke-width="3" opacity="0.4"/>
+          <line x1="305" y1="90" x2="305" y2="205" stroke="#8FC9BC" stroke-width="3" opacity="0.4"/>
+          <line x1="345" y1="90" x2="345" y2="205" stroke="#8FC9BC" stroke-width="3" opacity="0.4"/>
+          <path d="M115 145C115 128 128 115 145 115H190V220H115V145Z" fill="#007F71"/>
+          <rect x="126" y="130" width="48" height="34" rx="5" fill="#ffffff"/>
+          <rect x="122" y="178" width="38" height="24" rx="4" fill="#20328E"/>
+          <circle cx="152" cy="225" r="24" fill="#1e293b"/>
+          <circle cx="152" cy="225" r="10" fill="#ffffff"/>
+          <circle cx="310" cy="225" r="24" fill="#1e293b"/>
+          <circle cx="310" cy="225" r="10" fill="#ffffff"/>
+          <circle cx="362" cy="225" r="24" fill="#1e293b"/>
+          <circle cx="362" cy="225" r="10" fill="#ffffff"/>
+          <path d="M70 255C160 270 300 270 400 250" stroke="#007F71" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN 4: CARDS ALINEADAS HORIZONTALMENTE ================= -->
+  <section class="features-section" id="servicios">
+    <div class="features-container">
+      <div class="cards-horizontal-grid">
+        
+        <!-- Tarjeta 1: Teal -->
+        <div class="feature-card teal">
+          <div class="card-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+          </div>
+          <h4>Encomiendas Nacionales</h4>
+          <p>Envío ágil de documentos y paquetería comercial hasta 30 kg con tarifas competitivas.</p>
+        </div>
+
+        <!-- Tarjeta 2: White -->
+        <div class="feature-card white">
+          <div class="card-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h4>Protección de Carga</h4>
+          <p>Aseguramos tus paquetes para mayor tranquilidad de tu inversión.</p>
+        </div>
+
+        <!-- Tarjeta 3: Blue -->
+        <div class="feature-card blue">
+          <div class="card-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+          </div>
+          <h4>Entregas</h4>
+          <p>Tú eliges el plan de entrega, puerta a puerta o retiro directo en la oficina de TE Humboldt (Torre BNC, Boleíta)</p>
+        </div>
+
+        <!-- Tarjeta 4: Mint -->
+        <div class="feature-card mint">
+          <div class="card-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+            </svg>
+          </div>
+          <h4>Carga Pesada (+30kg)</h4>
+          <p>Tambien realizamos tu cotización personalizada para envíos de gran volumen, contáctanos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN 5: CTA FINAL ================= -->
+  <section class="cta-section">
+    <div class="cta-box">
+      <h2 class="cta-title">¿Listo para programar tu <span>próximo envío?</span></h2>
+      <p class="cta-subtitle">
+        Confirma los costos de envío o solicita la cotización personalizada con nuestro equipo directamente por WhatsApp.
+      </p>
+      <div class="cta-action-bar">
+        <a href="https://api.whatsapp.com/send?phone=584124259774" target="_blank" class="btn-hero-primary">Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer-wrapper">
+    <div class="footer-bottom-wave">
+      <div class="footer-copy">
+        © 2026 Transporte y Encomiendas Humboldt, C.A. — Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALES ================= -->
+  <div class="modal-overlay" id="modalModificarTasa">
+    <div class="modal-content">
+      <h3>Modificar Tasa BCV</h3>
+      <p style="text-align: center; margin-bottom: 10px;">Ingrese el valor actualizado de la tasa oficial en Bolívares (Bs):</p>
+      <input type="number" id="inputManualTasa" class="modal-input-tasa" placeholder="Ej. 36.50" step="0.01" min="0">
+      <div class="modal-buttons">
+        <button class="btn-modal-cancelar" onclick="cerrarModalTasa()">Cancelar</button>
+        <button class="btn-modal-guardar" onclick="guardarTasaManual()">Guardar</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Modificar Tasa BCV -->
-<div class="modal-overlay" id="modalModificarTasa">
-  <div class="modal-content">
-    <h3>Modificar Tasa BCV</h3>
-    <p style="text-align: center; margin-bottom: 10px;">Ingrese el valor actualizado de la tasa oficial en Bolívares (Bs):</p>
-    <input type="number" id="inputManualTasa" class="modal-input-tasa" placeholder="Ej. 36.50" step="0.01" min="0">
-    <div class="modal-buttons">
-      <button class="btn-modal-cancelar" onclick="cerrarModalTasa()">Cancelar</button>
-      <button class="btn-modal-guardar" onclick="guardarTasaManual()">Guardar</button>
+  <div class="modal-overlay" id="modalCamposVacios">
+    <div class="modal-content">
+      <h3>Campos incompletos</h3>
+      <p>Por favor, complete todos los campos requeridos y seleccione las opciones correspondientes en la calculadora antes de realizar su consulta.</p>
+      <div class="modal-buttons" style="justify-content: flex-end;">
+        <button class="btn-modal-volver" onclick="cerrarModalCampos()">Volver</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Campos Incompletos -->
-<div class="modal-overlay" id="modalCamposVacios">
-  <div class="modal-content">
-    <h3>Campos incompletos</h3>
-    <p>Por favor, complete todos los campos requeridos y seleccione las opciones correspondientes en la calculadora antes de realizar su consulta.</p>
-    <div class="modal-buttons" style="justify-content: flex-end;">
-      <button class="btn-modal-volver" onclick="cerrarModalCampos()">Volver</button>
+  <div class="modal-overlay" id="modalTasaFaltante">
+    <div class="modal-content">
+      <h3>Tasa BCV no disponible</h3>
+      <p>No se ha podido cargar o definir la tasa oficial del BCV. Por favor, haga clic en el botón <b>"Modificar"</b> de la parte superior para ingresarla manualmente antes de realizar su consulta.</p>
+      <div class="modal-buttons" style="justify-content: flex-end;">
+        <button class="btn-modal-volver" onclick="cerrarModalTasaFaltante()">Entendido</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Tasa BCV Faltante -->
-<div class="modal-overlay" id="modalTasaFaltante">
-  <div class="modal-content">
-    <h3>Tasa BCV no disponible</h3>
-    <p>No se ha podido cargar o definir la tasa oficial del BCV. Por favor, haga clic en el botón <b>"Modificar"</b> de la parte superior para ingresarla manualmente antes de realizar su consulta.</p>
-    <div class="modal-buttons" style="justify-content: flex-end;">
-      <button class="btn-modal-volver" onclick="cerrarModalTasaFaltante()">Entendido</button>
+  <div class="modal-overlay" id="modalExcesoPeso">
+    <div class="modal-content">
+      <h3>Aviso importante sobre su envío</h3>
+      <p>Hemos detectado que el peso de su paquete excede los <b>30kg</b>, por lo que clasifica como <b>carga pesada</b> y no como encomienda regular.<br><br>
+      Para brindarle una tarifa y un servicio adecuado, por favor comuníquese directamente con nuestro equipo para solicitar su cotización personalizada.</p>
+      <div class="modal-buttons">
+        <button class="btn-modal-cancelar" onclick="cerrarModalPeso()">Cancelar</button>
+        <button class="btn-modal-cotizar" onclick="enviarWhatsApp()">Cotizar envío</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Peso > 30kg -->
-<div class="modal-overlay" id="modalExcesoPeso">
-  <div class="modal-content">
-    <h3>Aviso importante sobre su envío</h3>
-    <p>Hemos detectado que el peso de su paquete excede los <b>30kg</b>, por lo que clasifica como <b>carga pesada</b> y no como encomienda regular.<br><br>
-    Para brindarle una tarifa y un servicio adecuado, por favor comuníquese directamente con nuestro equipo para solicitar su cotización personalizada.</p>
-    <div class="modal-buttons">
-      <button class="btn-modal-cancelar" onclick="cerrarModalPeso()">Cancelar</button>
-      <button class="btn-modal-cotizar" onclick="enviarWhatsApp()">Cotizar envío</button>
-    </div>
-  </div>
-</div>
+  <script>
+    let tasaBcvGlobal = 0;
 
-<script>
-  let tasaBcvGlobal = 0;
-
-  window.addEventListener('DOMContentLoaded', () => {
-    fetch('https://ve.dolarapi.com/v1/dolares/official')
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.promedio) {
-          tasaBcvGlobal = data.promedio;
-          document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
-        } else {
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('https://ve.dolarapi.com/v1/dolares/official')
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.promedio) {
+            tasaBcvGlobal = data.promedio;
+            document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
+          } else {
+            document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
+          }
+        })
+        .catch(error => {
+          console.error('Error al obtener la tasa BCV:', error);
           document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
-        }
-      })
-      .catch(error => {
-        console.error('Error al obtener la tasa BCV:', error);
-        document.getElementById('tasa-bcv-txt').innerText = 'Error de conexión';
-      });
-  });
+        });
+    });
 
-  function abrirModalTasa() {
-    document.getElementById('inputManualTasa').value = tasaBcvGlobal > 0 ? tasaBcvGlobal.toFixed(2) : '';
-    document.getElementById('modalModificarTasa').style.display = 'flex';
-  }
-
-  function cerrarModalTasa() {
-    document.getElementById('modalModificarTasa').style.display = 'none';
-  }
-
-  function cerrarModalTasaFaltante() {
-    document.getElementById('modalTasaFaltante').style.display = 'none';
-  }
-
-  function guardarTasaManual() {
-    const valInput = parseFloat(document.getElementById('inputManualTasa').value);
-    if (!isNaN(valInput) && valInput > 0) {
-      tasaBcvGlobal = valInput;
-      document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
-      cerrarModalTasa();
-      ocultarResultados();
-    } else {
-      alert("Por favor ingrese una tasa válida.");
-    }
-  }
-
-  function ocultarResultados() {
-    document.getElementById('box-resultados').style.display = 'none';
-  }
-
-  function mostrarResultados() {
-    const servicio = document.getElementById('servicio').value;
-    const modalidad = document.getElementById('modalidad').value;
-    const ciudadOrigen = document.getElementById('ciudad_origen').value.trim();
-    const ciudadDestino = document.getElementById('ciudad_destino').value.trim();
-    const pesoInput = document.getElementById('peso').value;
-    const tipoEnvio = document.getElementById('tipo_envio').value;
-    const valorDeclaradoInput = document.getElementById('valor_declarado').value;
-
-    if (!servicio || !modalidad || ciudadOrigen === "" || ciudadDestino === "" || pesoInput === "" || !tipoEnvio || valorDeclaradoInput === "") {
-      ocultarResultados();
-      document.getElementById('modalCamposVacios').style.display = 'flex';
-      return;
+    function abrirModalTasa() {
+      document.getElementById('inputManualTasa').value = tasaBcvGlobal > 0 ? tasaBcvGlobal.toFixed(2) : '';
+      document.getElementById('modalModificarTasa').style.display = 'flex';
     }
 
-    const peso = parseFloat(pesoInput);
-
-    if (peso > 30) {
-      ocultarResultados();
-      document.getElementById('modalExcesoPeso').style.display = 'flex';
-      return;
+    function cerrarModalTasa() {
+      document.getElementById('modalModificarTasa').style.display = 'none';
     }
 
-    if (tasaBcvGlobal <= 0) {
-      ocultarResultados();
-      document.getElementById('modalTasaFaltante').style.display = 'flex';
-      return;
+    function cerrarModalTasaFaltante() {
+      document.getElementById('modalTasaFaltante').style.display = 'none';
     }
 
-    const valorDeclaradoBs = parseFloat(valorDeclaradoInput);
+    function guardarTasaManual() {
+      const valInput = parseFloat(document.getElementById('inputManualTasa').value);
+      if (!isNaN(valInput) && valInput > 0) {
+        tasaBcvGlobal = valInput;
+        document.getElementById('tasa-bcv-txt').innerText = `Bs. ${tasaBcvGlobal.toFixed(2)}`;
+        cerrarModalTasa();
+        ocultarResultados();
+      } else {
+        document.getElementById('modalTasaFaltante').style.display = 'flex';
+      }
+    }
 
-    const fleteUsd = peso * 3.95;
-    const fleteBs = fleteUsd * tasaBcvGlobal;
-    const seguroBs = valorDeclaradoBs * 0.035;
-    const subtotalBs = fleteBs + seguroBs;
-    const ivaBs = subtotalBs * 0.16;
-    const franqueoBs = fleteBs * 0.08;
+    function ocultarResultados() {
+      document.getElementById('box-resultados').style.display = 'none';
+    }
 
-    const totalBs = subtotalBs + ivaBs + franqueoBs;
-    const totalUsd = totalBs / tasaBcvGlobal;
+    function mostrarResultados() {
+      const servicio = document.getElementById('servicio').value;
+      const modalidad = document.getElementById('modalidad').value;
+      const ciudadOrigen = document.getElementById('ciudad_origen').value.trim();
+      const ciudadDestino = document.getElementById('ciudad_destino').value.trim();
+      const pesoInput = document.getElementById('peso').value;
+      const tipoEnvio = document.getElementById('tipo_envio').value;
+      const valorDeclaradoInput = document.getElementById('valor_declarado').value;
 
-    const formatoBs = (monto) => `Bs ${monto.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      if (!servicio || !modalidad || ciudadOrigen === "" || ciudadDestino === "" || pesoInput === "" || !tipoEnvio || valorDeclaradoInput === "") {
+        ocultarResultados();
+        document.getElementById('modalCamposVacios').style.display = 'flex';
+        return;
+      }
 
-    document.getElementById('res_flete').innerText = formatoBs(fleteBs);
-    document.getElementById('res_seguro').innerText = formatoBs(seguroBs);
-    document.getElementById('res_subtotal').innerText = formatoBs(subtotalBs);
-    document.getElementById('res_iva').innerText = formatoBs(ivaBs);
-    document.getElementById('res_franqueo').innerText = formatoBs(franqueoBs);
-    
-    document.getElementById('res_total_bs').innerText = formatoBs(totalBs);
-    document.getElementById('res_total_usd').innerText = `$${totalUsd.toFixed(2)} USD`;
+      const peso = parseFloat(pesoInput);
 
-    document.getElementById('box-resultados').style.display = 'block';
-  }
+      if (peso > 30) {
+        ocultarResultados();
+        document.getElementById('modalExcesoPeso').style.display = 'flex';
+        return;
+      }
 
-  function cerrarModalCampos() {
-    document.getElementById('modalCamposVacios').style.display = 'none';
-  }
+      if (tasaBcvGlobal <= 0) {
+        ocultarResultados();
+        document.getElementById('modalTasaFaltante').style.display = 'flex';
+        return;
+      }
 
-  function cerrarModalPeso() {
-    document.getElementById('modalExcesoPeso').style.display = 'none';
-  }
+      const valorDeclaradoBs = parseFloat(valorDeclaradoInput);
 
-  function enviarWhatsApp() {
-    const origen = document.getElementById('ciudad_origen').value.trim();
-    const destino = document.getElementById('ciudad_destino').value.trim();
-    const tipoEnvioTexto = document.getElementById('tipo_envio').options[document.getElementById('tipo_envio').selectedIndex].text;
-    const peso = document.getElementById('peso').value;
+      const fleteUsd = peso * 3.95;
+      const fleteBs = fleteUsd * tasaBcvGlobal;
+      const seguroBs = valorDeclaradoBs * 0.035;
+      const subtotalBs = fleteBs + seguroBs;
+      
+      const ivaBs = subtotalBs * 0.16;
+      const franqueoBs = fleteBs * 0.08;
+      const impuestosBs = ivaBs + franqueoBs;
 
-    const mensaje = `Hola, necesito cotizar un envío de más de 30kg, aquí les comparto los datos de mi envío:\n\n- Origen: ${origen}\n- Destino: ${destino}\n- Tipo de mercancía / producto: ${tipoEnvioTexto}\n- Peso: ${peso}kg\n\nQuedo atento a su respuesta para coordinar la logística.`;
+      const totalBs = subtotalBs + impuestosBs;
+      const totalUsd = totalBs / tasaBcvGlobal;
 
-    const numeroWhatsApp = "584124259774";
-    const urlWp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
-    
-    window.open(urlWp, '_blank');
-    cerrarModalPeso();
-  }
-</script>
+      const formatoBs = (monto) => `Bs ${monto.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+      document.getElementById('res_flete').innerText = formatoBs(fleteBs);
+      document.getElementById('res_seguro').innerText = formatoBs(seguroBs);
+      document.getElementById('res_subtotal').innerText = formatoBs(subtotalBs);
+      document.getElementById('res_impuestos').innerText = formatoBs(impuestosBs);
+      
+      document.getElementById('res_total_bs').innerText = formatoBs(totalBs);
+      document.getElementById('res_total_usd').innerText = `$${totalUsd.toFixed(2)} USD`;
+
+      document.getElementById('box-resultados').style.display = 'block';
+    }
+
+    function cerrarModalCampos() {
+      document.getElementById('modalCamposVacios').style.display = 'none';
+    }
+
+    function cerrarModalPeso() {
+      document.getElementById('modalExcesoPeso').style.display = 'none';
+    }
+
+    function enviarWhatsApp() {
+      const origen = document.getElementById('ciudad_origen').value.trim();
+      const destino = document.getElementById('ciudad_destino').value.trim();
+      const tipoEnvioTexto = document.getElementById('tipo_envio').options[document.getElementById('tipo_envio').selectedIndex].text;
+      const peso = document.getElementById('peso').value;
+
+      const mensaje = `Hola, necesito cotizar un envío de más de 30kg, aquí les comparto los datos de mi envío:\n\n- Origen: ${origen}\n- Destino: ${destino}\n- Tipo de mercancía / producto: ${tipoEnvioTexto}\n- Peso: ${peso}kg\n\nQuedo atento a su respuesta para coordinar la logística.`;
+
+      const numeroWhatsApp = "584124259774";
+      const urlWp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
+      
+      window.open(urlWp, '_blank');
+      cerrarModalPeso();
+    }
+  </script>
 
 </body>
 </html>
